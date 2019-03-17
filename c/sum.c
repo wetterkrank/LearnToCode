@@ -9,4 +9,4 @@ int main() {
     int a2 = 300;
 
     printf("%d", sum2args(a1,a2));
-}
+};
