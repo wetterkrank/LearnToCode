@@ -22,7 +22,7 @@ int main() {
         printf("Your BMI is too high (over 25) \n");
     } else if (BMI >= 18.5 && BMI < 25) {
         printf("Your BMI is within normal limits (18.5 - 25)\n");
-    } else if (BMI < 18.5) {
+    } else {
         printf("Your BMI is too low (under 18.5) \n");
     };
 
