@@ -9,5 +9,5 @@ int main() {
     int a1 = 200;
     int a2 = 300;
 
-    printf("%d", sum2args(a1,a2));
+    printf("%d \n", sum2args(a1,a2));
 };
