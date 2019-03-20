@@ -1,19 +1,18 @@
 #include "stdio.h"
-#include "math.h"
 
-float calcBMI(int h, int w) {
-    return (w/powf((float)h/100,2));
+float calcBMI(float h, float w) {
+    return (w/(h*h)*10000);
 };
 
 int main() {
 
-    int height, weight;
+    float height, weight;
 
     printf("Enter your height in cm: ");
-    scanf("%d", &height);
+    scanf("%f", &height);
 
     printf("Enter your weight in kg: ");
-    scanf("%d", &weight);
+    scanf("%f", &weight);
 
     float BMI = calcBMI(height, weight);
     printf("BMI: %.1f \n", BMI);
