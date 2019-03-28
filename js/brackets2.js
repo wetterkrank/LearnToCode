@@ -5,7 +5,7 @@ function balancedBrackets(str, sum = 0) {
   if (str.charAt(0) == '(') { sum++; }
   if (str.charAt(0) == ')') { sum--; }
 
-  if (sum < 0) { return false; };
+  if (sum < 0) { return false; }
 
   return balancedBrackets(str.substring(1), sum);
 
