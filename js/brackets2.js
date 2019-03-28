@@ -1,11 +1,7 @@
 function BB(str, sum = 0) {
 
   if (str.length == 0) {
-    if (sum == 0) {
-      return true;
-    } else {
-      return false;
-    };
+    return (sum == 0);
   };
 
   if (str.charAt(0) == '(') { sum++; };
