@@ -24,7 +24,6 @@ function isPalindrome(str) {
 
 var ignore = /[.,:;?!`'-()" ]/;
 
-console.log("ab:", isPalindrome("ab"));
 console.log("abcabc:", isPalindrome("abcabc"));
 console.log("abccba:", isPalindrome("abccba"));
 console.log("Madam, I'm Adam:", isPalindrome("Madam, I'm Adam"));
