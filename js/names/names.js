@@ -1,5 +1,5 @@
 // Read names.txt and count lines, see readme.txt
-// Not using callbacks though
+// Not using callbacks though (?)
 
 const fs = require('fs');
 const readline = require('readline');
