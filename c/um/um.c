@@ -32,7 +32,7 @@ int main (void) {
     printf("um.um size: %d\n",fsize);
 
     char umArray[fsize];
-    fread(umArray, sizeof(umArray[0]), fsize, fp);
+    fread(umArray, 1, fsize, fp);
     fclose(fp);
 
     // printChArr(umArray, fsize);
