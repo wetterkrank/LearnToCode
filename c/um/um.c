@@ -31,13 +31,11 @@ int main (void) {
 
     printf("um.um size: %d\n",fsize);
 
-    // variable-defined array size supported since C99; otherwise, use malloc etc
-    unsigned umArray[fsize];
+    char umArray[fsize];
     fread(umArray, sizeof(umArray[0]), fsize, fp);
     fclose(fp);
 
-    printChArr(umArray, fsize);
-    // printUIntArr(umArray, fsize);
+    // printChArr(umArray, fsize);
+    printUIntArr(umArray, fsize/sizeof(unsigned));
 
 };
-
