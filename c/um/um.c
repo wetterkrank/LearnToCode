@@ -27,6 +27,7 @@ int main (void) {
     FILE* fp = fopen("um.um", "rb");
     fseek(fp, 0L, SEEK_END);
     long fsize = ftell(fp);
+    rewind(fp);
 
     printf("um.um size: %d\n",fsize);
 
