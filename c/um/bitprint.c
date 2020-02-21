@@ -1,12 +1,13 @@
+// bits printing, masks, and bitshift study
+// Some useful links:
+// http://progslides.github.io/ws15/bitmask/bitmask.html
+
 #include <stdio.h>
 #include <stdint.h>
 #include <limits.h>
 #include <arpa/inet.h>
 #include <errno.h>
 #include <math.h>
-
-// Some useful links
-// http://progslides.github.io/ws15/bitmask/bitmask.html
 
 // variant 1, from https://jameshfisher.com/2017/02/23/printing-bits/
 
