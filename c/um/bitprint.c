@@ -119,5 +119,19 @@ int main() {
     printf(" mask 1-25: "); bitPrint (33554431); // bits 1-25
     printf("      1-25: "); bitPrint (0xdc000074 & 33554431); // bits 1-25
 
+    // NAND
+    // Note ~0 = -1! (because 0xFF is 256, not 255)
+
+    printf("\n");
+
+    unsigned A = 0x00000011;
+    unsigned B = 0xFFFFFFF0;
+  
+    bitPrint(A);
+    bitPrint(B);
+
+    unsigned C = ~A | ~B;
+    bitPrint(C);
+
   return 0;
 }
