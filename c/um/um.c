@@ -4,7 +4,7 @@
 #include "stdio.h"
 #include "stdlib.h"
 #include "arpa/inet.h"
-
+//////WE WANT TO MERGE!!!!
 int bitPrint (unsigned num)
 {
   unsigned int size = sizeof(unsigned int);
