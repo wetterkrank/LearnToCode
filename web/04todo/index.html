@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+    <style>
+        html { height: 100% }
+        body {
+            margin: 0px;
+            padding: 12px;
+            background-image: linear-gradient(#272E5D, #171C40);
+            color: white;
+            font-family: "Ubuntu";
+        }
+        h1 {
+            margin: 0px;
+            padding: 0px;
+            width: 450px;
+            margin-left: 15px;
+            margin-bottom: 15px;
+            font-size: 30px;
+        }
+        ul {
+            margin: 0px;
+            padding: 0px;
+            margin-left: 15px;
+        }
+        li {
+            margin: 0px;
+            padding: 0px;
+            list-style: none;
+            height: 48px;
+            line-height: 48px;
+            width: 450px;
+            font-size: 14px;
+            overflow: hidden;
+            padding-left: 51px;
+            margin-bottom: 12px;
+            background-color: #6E66C4;
+            background-size: 18px 18px;
+            background-image: url(icon/to-do.svg);
+            background-repeat: no-repeat;
+            background-position: 20px center;
+            border-radius: 3px;          
+        }
+        li.done {
+            background-color: #46417F;
+            background-image: url(icon/done.svg);
+            text-decoration: line-through;
+            color: #6E66C4;
+        }
+    </style>
+    <script type="text/javascript">
+        function changeStatus(ev) {
+            var todo = ev.target;
+            if (todo.className == "done") {
+                todo.className = "";
+            } else {
+                todo.className = "done";
+            }
+        }
+        function addClickEvents() {
+            var items = document.getElementsByTagName("li");
+            var i;
+            for(i=0; i<items.length; i++) {
+                items[i].addEventListener("click", changeStatus);
+            }
+        }
+        window.addEventListener("load", addClickEvents);
+
+        // prevent text selection on double click; alternatively, use <button> tag for li?
+        document.addEventListener('mousedown', function (event) {
+            if (event.detail > 1) {
+                event.preventDefault();
+            }
+        }, false);
+    </script>
+</head>
+<body>
+    <h1>14 апреля, вторник</h1>
+    <ul>
+        <li class="done">Работа</li>
+        <li class="done">Работа</li>
+        <li>Работа</li>
+        <li>Перейти на бегемота</li>
+        <li>А вот Шахиншах Иран и принцесса Сорея. А Шахиншах такой красивенький-красивенький, и на меня похож, да?</li>
+    </ul>
+</body>
+</html>
