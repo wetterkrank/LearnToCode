@@ -1,0 +1,79 @@
+html {
+  height: 100%;
+}
+body {
+  background-image: linear-gradient(#272E5D, #171C40);
+  margin: 0px;
+  padding: 12px;
+  color: white;
+  font-family: 'Ubuntu';
+}
+
+ul {
+  margin: 0px;
+  padding: 0px;
+  margin-left: 15px;
+}
+li {
+  list-style: none;
+  font-size: 14px;
+  margin: 0px;
+  padding: 0px;
+  padding-left: 51px;
+  line-height: 48px;
+  margin-bottom: 12px;
+  background-color: #6E66C4;
+  background-size: 18px 18px;
+  background-image: url(icon/to-do.svg);
+  background-repeat: no-repeat;
+  background-position: 20px center;
+  height: 48px;
+  width: 450px;
+  border-radius: 3px;
+  cursor: pointer;
+ }
+ li:active, li.done {
+   background-color: #46417F;
+   background-image: url(icon/done.svg);
+   text-decoration: line-through;
+   color: #6E66C4;
+ }
+h1 {
+  font-size: 30px;
+  margin: 0px;
+  padding: 0px;
+  margin-left: 15px;
+  margin-bottom: 15px;
+  color: #17C48E;
+  font-weight: normal;
+}
+
+textarea {
+  margin-left: 15px;
+  width:300px;
+  height:80px;
+  background: #171C3D;
+  border: 3px solid #171C3D;
+  border-radius: 3px;
+  outline: 0;
+  font-size: 18px;
+  color: #EEE;
+  padding: 6px;
+}
+
+textarea::placeholder {
+  font-size: 14px;
+}
+
+.button {
+  width: 90px;
+  text-align: center;
+  margin: 12px 0px 30px 0px;
+  font-size: 16px;
+  background-color: #17C48E;
+  color: #FFF;
+  border: 0px;
+  border-radius: 6px;
+  padding: 6px 15px;
+  cursor: pointer;
+}

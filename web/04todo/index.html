@@ -41,7 +41,11 @@
             background-image: url(icon/to-do.svg);
             background-repeat: no-repeat;
             background-position: 20px center;
-            border-radius: 3px;          
+            border-radius: 3px;
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
         }
         li.done {
             background-color: #46417F;
@@ -49,41 +53,73 @@
             text-decoration: line-through;
             color: #6E66C4;
         }
+        textarea {
+            margin: 0px;
+            padding: 0px;
+            margin-left: 15px;
+            padding-left: 20px;
+            height: 48px;
+            line-height: 48px;
+            width: 481px;
+            font-family: "Ubuntu";
+            resize: none;
+            outline: none;
+            border: none;
+            border-radius: 3px;  
+            overflow: hidden;
+        }
     </style>
     <script type="text/javascript">
-        function changeStatus(ev) {
-            var todo = ev.target;
-            if (todo.className == "done") {
-                todo.className = "";
-            } else {
-                todo.className = "done";
-            }
+        
+        function changeItemState(ev) {
+            ev.target.classList.toggle("done")
         }
-        function addClickEvents() {
-            var items = document.getElementsByTagName("li");
+
+        // sets click events for the array of specified todo items
+        function addClickEvents(items) {
             var i;
             for(i=0; i<items.length; i++) {
-                items[i].addEventListener("click", changeStatus);
+                items[i].addEventListener("click", changeItemState);
             }
         }
-        window.addEventListener("load", addClickEvents);
 
-        // prevent text selection on double click; alternatively, use <button> tag for li?
-        document.addEventListener('mousedown', function (event) {
-            if (event.detail > 1) {
+        function addTodoItem() {
+            newItem = document.getElementById("newTodoItem");
+            if (newItem.value != "") {
+                var node = document.createElement("LI");
+                var textNode = document.createTextNode(newItem.value);
+                node.appendChild(textNode);
+                document.getElementById("todoList").appendChild(node);
+                newItem.value = "";
+                addClickEvents([node]);
+            }
+        }
+
+        function submitOnEnter(event){
+            if(event.which === 13){
+                addTodoItem();
                 event.preventDefault();
             }
-        }, false);
+        }
+
+        function initOnLoad () {
+            addClickEvents(document.getElementsByTagName("li"));
+            document.getElementById("newTodoItem").addEventListener("keypress", submitOnEnter);
+            document.getElementById("newTodoItem").addEventListener("blur", addTodoItem);
+        }
+
+        window.addEventListener("load", initOnLoad);
     </script>
 </head>
 <body>
     <h1>14 апреля, вторник</h1>
-    <ul>
+    <ul id="todoList">
         <li class="done">Работа</li>
         <li class="done">Работа</li>
         <li>Работа</li>
         <li>Перейти на бегемота</li>
         <li>А вот Шахиншах Иран и принцесса Сорея. А Шахиншах такой красивенький-красивенький, и на меня похож, да?</li>
     </ul>
+    <textarea id="newTodoItem" wrap="off" placeholder="Add a new task"></textarea>
 </body>
 </html>

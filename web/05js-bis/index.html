@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='UTF-8'>
+    <link href='https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap' rel='stylesheet'>
+    <link href='style.css' rel='stylesheet' type='text/css' />
+
+    <script type='text/javascript'>
+        
+        let todoList = [
+            {id:1, task:'Покормить черепаху', state:0}, 
+            {id:2, task:'Полить цветы', state:1}, 
+            {id:3, task:'Дочитать "Капитал"', state:0}, 
+            {id:4, task:'Позвонить маме', state:1}, 
+            {id:5, task:'Заплатить налоги', state:0}
+        ];
+
+        function changeItemState(ev) {
+            ev.target.classList.toggle('done');
+            // todo: also toggle in array
+        }
+
+        // args: task text, state 1/0, position 'top' for the list top
+        function appendHTMLItem(task, state, position) {
+            var node = document.createElement('LI');
+            var textNode = document.createTextNode(task);
+            var todoUL = document.getElementById('todoUL');
+
+            node.appendChild(textNode);
+            if (state) { node.classList.add('done'); }
+            if (position == 'top') {position = todoUL.firstChild}
+            todoUL.insertBefore(node, position);
+            addClickEvents([node]);
+        }
+
+        // take submitted task, add task into array, add task in HTML, clear input
+        function submitNewItem(event) {
+            if (event.target.value != '') {
+                appendHTMLItem(event.target.value, 0, 'top')
+                event.target.value = '';
+            }
+        }
+
+        function checkForEnter(event) {
+            if (event.which === 13) {
+                submitNewItem(event);
+                event.preventDefault();
+            }
+        }
+
+        // sets click events for the array of specified todo items
+        function addClickEvents(items) {
+            var i;
+            for (i=0; i<items.length; i++) {
+                items[i].addEventListener('click', changeItemState);
+            }
+        }
+
+        // displays the todo list from an array
+        function displayTodoList(list) {
+            for (let entry of list) {
+                appendHTMLItem(entry.task, entry.state);
+            }
+        }
+
+        function sortTodoList(list) {
+            const sortByDone = (entryA, entryB) => {
+                return entryA.state - entryB.state;
+            }
+            return list.sort(sortByDone);
+        }
+
+        function initOnLoad () {
+            todoList = sortTodoList(todoList);
+            displayTodoList(todoList);
+            addClickEvents(document.getElementsByTagName('li'));
+            document.getElementById('newItemInput').addEventListener('keypress', checkForEnter);
+            document.getElementById('newItemInput').addEventListener('blur', submitNewItem);
+        }
+
+        window.addEventListener('load', initOnLoad);
+    </script>
+</head>
+
+<body>
+    <h1>14 апреля, вторник</h1>
+    <textarea id='newItemInput' wrap='off' placeholder='Add a new task'></textarea>
+    <ul id='todoUL'>
+    </ul>
+</body>
+</html>

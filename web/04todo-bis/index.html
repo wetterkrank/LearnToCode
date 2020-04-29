@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <style>
+        @import url("fonts/HelveticaNeue/stylesheet.css");
+        html { min-height: 101%; }
+        body {
+            margin: 0px;
+            padding: 0px;
+            padding-left: 45px;
+            padding-right: 45px;
+            background: black;
+            color: white;
+            font-family: Roboto, HelveticaNeueCyr;
+        }
+        h1 {
+            margin: 0px;
+            padding: 0px;
+            margin-top: 30px;
+            margin-bottom: 0.5rem;
+            font-size: 3.125rem;
+            font-weight: 500;
+            text-align: center;
+        }
+        ul {
+            margin: 0px;
+            padding: 0px;
+            font-size: 1.625rem;
+            font-weight: normal;
+            width: 75%;
+            max-width: 815px;
+            margin: 2em auto;
+        }
+        li.qa {
+            margin: 0px;
+            padding: 0px;
+            list-style: none;
+            margin-bottom: 8px;
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        div.q {
+            padding: 0.8em 2.2em 0.8em 1.2em;
+            position: relative;
+            background-color: rgb(48, 48, 48);
+        }
+        svg.x {
+            margin: 0px;
+            padding: 0px;
+            fill: white;
+            height: 1em;
+            width: 1em;
+            position: absolute;
+            right: 1em;
+            top: 50%;
+            transform: translateY(-50%) rotate(-45deg);
+            transition: all 0.25s;
+        }
+        svg.x.open {
+            transform: translateY(-50%);
+        }
+        div.a {
+            margin-top: 1px;
+            padding: 0.8em 2.2em 0.8em 1.2em;
+            background-color: rgb(48, 48, 48);
+            max-height: 800px;
+            transition: max-height 0.25s, padding 0.30s, visibility 0.30s; 
+        }
+        div.a.hidden {
+            padding-top: 0px;
+            padding-bottom: 0px;
+            max-height: 0px;
+            overflow: hidden;
+            visibility: hidden;
+        }
+    </style>
+    <script type="text/javascript">
+        function toggleAnswer(currentQ) {
+            let currentA = currentQ.nextElementSibling;
+            let currentX = currentQ.children[0];
+            let currentAHidden = currentA.classList.contains("hidden");
+
+            for (everyA of document.getElementsByClassName("a")) {
+                everyA.classList.add("hidden");
+            }
+            for (everyX of document.getElementsByClassName("x")) {
+                everyX.classList.remove("open")
+            }
+            if (currentAHidden) { 
+                currentA.classList.remove("hidden");
+                currentX.classList.add("open");
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Frequently Asked Questions</h1>
+    <ul id="faq">
+        <li class="qa">
+            <div class="q" onclick="toggleAnswer(this)">
+                Что у меня в кармане?
+                <svg class="x">
+                    <path d="M10.5 9.3L1.8 0.5 0.5 1.8 9.3 10.5 0.5 19.3 1.8 20.5 10.5 11.8 19.3 20.5 20.5 19.3 11.8 10.5 20.5 1.8 19.3 0.5 10.5 9.3Z"></path>
+                </svg>
+            </div>
+            <div class="a hidden">-- Веревка! Или нич-чего! -- взвизгнул Голлум, 
+                хотя давать сразу два ответа было нечестно.
+            </div>
+        </li>
+        <li class="qa">
+            <div class="q" onclick="toggleAnswer(this)">Русь, куда ж несешься ты, дай ответ?
+                <svg class="x">
+                    <path d="M10.5 9.3L1.8 0.5 0.5 1.8 9.3 10.5 0.5 19.3 1.8 20.5 10.5 11.8 19.3 20.5 20.5 19.3 11.8 10.5 20.5 1.8 19.3 0.5 10.5 9.3Z"></path>
+                </svg>
+            </div>
+            <div class="a hidden">Не дает ответа. Чудным звоном заливается колокольчик; 
+                гремит и становится ветром разорванный в куски воздух; летит мимо всё, что ни есть на земли, 
+                и косясь постораниваются и дают ей дорогу другие народы и государства.</div>
+        </li>
+        <li class="qa">
+            <div class="q" onclick="toggleAnswer(this)">The Ultimate Question of Life, the Universe, 
+                and Everything
+                <svg class="x">
+                    <path d="M10.5 9.3L1.8 0.5 0.5 1.8 9.3 10.5 0.5 19.3 1.8 20.5 10.5 11.8 19.3 20.5 20.5 19.3 11.8 10.5 20.5 1.8 19.3 0.5 10.5 9.3Z"></path>
+                </svg>
+            </div>
+            <div class="a hidden">42</div>
+        </li>
+    </ul>
+</body>
+</html>
