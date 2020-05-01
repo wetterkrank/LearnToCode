@@ -1,40 +1,55 @@
+// TODO: Mobile-friendly delete icons
+
 let todoList = [];
 let settings = {};
 
 const defaultSettings = {showCompleted: true};
 const defaultTodoList = [
-    {id:1, task:'Покормить черепаху', state:0}, 
-    {id:2, task:'Полить цветы', state:1}, 
-    {id:3, task:'Дочитать "Капитал"', state:0}, 
-    {id:4, task:'Позвонить маме', state:1}, 
-    {id:5, task:'Заплатить налоги', state:0}
+    {id: 1, task: 'Покормить черепаху', state: false}, 
+    {id: 2, task: 'Полить цветы', state: true}, 
+    {id: 3, task: 'Дочитать "Капитал"', state: false}, 
+    {id: 4, task: 'Позвонить маме', state: true}, 
+    {id: 5, task: 'Заплатить налоги', state: false}
 ];
 
 
 function toggleItemState(event) {
     // TODO: toggle the item in array first
-    let item = event.target;
-    item.classList.toggle('done');
-    let done = item.classList.contains('done');
-    todoList[getPosById(todoList, item.id)].state = (done) ? 1 : 0;
-    console.log(todoList[getPosById(todoList, item.id)]);
+    let element = event.target.parentElement;
+    itemPos = getPosById(todoList, element.id);
+    console.log('Toggle item done:', element, todoList[itemPos]);
+    element.classList.toggle('done');
+    let done = element.classList.contains('done');
+    todoList[itemPos].state = done;
     saveToLS();
-    // TODO: remove only one LI element if done and showCompleted not checked
-    displayList();
+    if (!settings.showCompleted && done) element.remove();
 }
 
 // args: task, position 'top' for the list top or none for bottom
+// TODO: make the whole LI an object?
 function appendULItem(item, position) {
     if ((!item.state) || (item.state && settings.showCompleted)) {
         let todoUL = document.getElementById('todoUL');
         if (position == 'top') {position = todoUL.firstChild}
-        let node = document.createElement('li');
-        node.id = item.id;
-        if (item.state) node.classList.add('done');
+        let li = document.createElement('li');
+        li.id = item.id;
+        if (item.state) li.classList.add('done');
+        let checkBtn = document.createElement('button');
+        checkBtn.classList.add('doneCheckbox');
+        checkBtn.setAttribute('type', 'button');
+        let textDiv = document.createElement('div');
+        textDiv.classList.add('text');
         let textNode = document.createTextNode(item.task);
-        node.appendChild(textNode);
-        todoUL.insertBefore(node, position);
-        addClickEvents([node]);
+        textDiv.appendChild(textNode);
+        let trashBtn = document.createElement('div');
+        trashBtn.classList.add('trashButton');
+        li.appendChild(checkBtn);
+        li.appendChild(textDiv);
+        li.appendChild(trashBtn);
+        todoUL.insertBefore(li, position);
+        checkBtn.addEventListener('click', toggleItemState);
+        // textDiv.addEventListener('click', editItem);
+        trashBtn.addEventListener('click', deleteItem);
     }
 }
 
@@ -58,18 +73,9 @@ function checkForEnter(event) {
     }
 }
 
-// sets click events for todo items (passed as array)
-function addClickEvents(items) {
-    let i;
-    for (i=0; i<items.length; i++) {
-        items[i].addEventListener('click', toggleItemState);
-    }
-}
-
 // redraws the todo list HTML
-function displayList() {
-    console.log('redrawing the list...');
-    todoList = sortList(todoList);
+function redrawList() {
+    console.log('Redrawing the list');
     let todoUL = document.getElementById('todoUL');
     todoUL.innerHTML = '';
     todoList.forEach(entry => appendULItem(entry));
@@ -82,9 +88,7 @@ function displaySettings() {
 }
 
 function sortList(list) {
-    const sortByDone = (entryA, entryB) => {
-        return entryA.state - entryB.state;
-    }
+    const sortByDone = (entryA, entryB) => { return entryA.state - entryB.state; }
     return list.sort(sortByDone);
 }
 
@@ -94,6 +98,7 @@ function getPosById(list, taskId) {
 }
 
 function getMaxId(list) {
+    if (list.length == 0) return 0;
     return list.reduce((max, entry) => (entry.id > max ? entry.id : max), list[0].id);
 }
 
@@ -113,12 +118,23 @@ function saveToLS() {
 function checkboxClick(event) {
     settings.showCompleted = event.target.checked;
     saveToLS();
-    displayList();
+    redrawList();
+}
+
+function deleteItem(event) {
+    // TODO: to avoid using stopPropagation, separate click areas
+    event.stopPropagation();
+    todoElement = event.target.parentElement;
+    console.log('Delete:', todoElement);
+    todoList.splice(getPosById(todoList, todoElement.id),1);
+    saveToLS();
+    redrawList();
 }
 
 function initOnLoad () {
     loadFromLS();
-    displayList();
+    todoList = sortList(todoList);
+    redrawList();
     displaySettings();
     document.getElementById('showCompleted').addEventListener('click', checkboxClick);
     document.getElementById('newItemInput').addEventListener('keypress', checkForEnter);
