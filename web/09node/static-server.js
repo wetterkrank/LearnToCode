@@ -16,9 +16,11 @@ const response = (req, res) => {
         res.end(BIN);
     }
     else {
-        const HTML = fs.readFileSync(('.' + fname), 'utf8');
-        res.writeHead(200, {'Content-Type': 'text/html'});
-        res.end(HTML);
+        const HTML = fs.readFile(('.' + fname), 'utf8', (err, content) => {
+            if (err) throw err;
+            res.writeHead(200, {'Content-Type': 'text/html'});
+            res.end(content);
+        });
     }
 }
 
