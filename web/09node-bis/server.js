@@ -5,26 +5,20 @@ const fs = require('fs');
 const allowedNames = /^\/[\w\-\_]+(.[\w\-\_]+)$/;
 const index = '/index.html';
 const pubDir = './public';
+const dataFile = './data/data.json';
 const mimeTypes = {
-    '.html': { 'type': 'text/html', 'enc': 'utf8' },
-    '.js': { 'type': 'application/javascript', 'enc': 'utf8' },
-    '.css': { 'type': 'text/css', 'enc': 'utf8' },
-    '.ico': { 'type': 'image/x-icon', 'enc': null }
+    '.html': 'text/html',
+    '.js': 'application/javascript',
+    '.css': 'text/css',
+    '.ico': 'image/x-icon',
+    '.png': 'image/png'
 };
 
 // We read the data file once on start now
-const dataArray = Object.entries(JSON.parse(fs.readFileSync('./data/data.json', 'utf8')));
+const dataArray = Object.entries(JSON.parse(fs.readFileSync(dataFile, 'utf8')));
 
 // Server response callback
 const response = (req, res) => {
-    // TODO: serve favicon normally
-    if (req.url == '/favicon.ico') {
-        const bin = fs.readFileSync((pubDir + '/favicon.ico'), null);
-        res.writeHead(200, {'Content-Type': 'image/x-icon'});
-        res.end(bin);
-        return;
-    }
-
     let q = url.parse(req.url, true);
 
     // Data server part
@@ -54,23 +48,35 @@ const response = (req, res) => {
         let fname = q.pathname;
         let fext = allowedNames.exec(fname)[1];
 
-        if (fs.existsSync(pubDir + fname)) {
-            const contents = fs.readFileSync((pubDir + fname), 'utf8');
-            res.writeHead(200, {'Content-Type': 'text/html'});
-            res.end(contents);
-        } else {
-            res.writeHead(404, { 'Content-Type': 'text/html' });
-            res.end('Not found');
-        }
+        let contentType = mimeTypes[fext] || 'application/octet-stream';
+        console.log('Content type:', contentType);
+
+        fs.readFile((pubDir + fname), (err, contents) => {
+            if (err) {
+                if (err.code == 'ENOENT') {
+                    res.writeHead(404, { 'Content-Type': 'text/html' });
+                    res.end('Not found');
+                } else {
+                    res.writeHead(500, { 'Content-Type': 'text/html' });
+                    res.end('Server error');
+                    console.log(err);
+                }
+            } else {
+                // TODO: return Content-Type based on extension
+                res.writeHead(200, {'Content-Type': contentType});
+                res.end(contents, 'utf-8');
+            }
+            console.log(res.statusCode);
+        });
     } else {
         res.writeHead(400, { 'Content-Type': 'text/html' });
         res.end('Bad request');
+        console.log(res.statusCode);
     }
-    console.log(res.statusCode);
 }
 
 const server = http.createServer(response);
 const port = 8080;
 server.listen(port);
 
-console.log(`Static server listens at ${port}`);
+console.log(`Static/data server listens at ${port}`);

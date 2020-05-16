@@ -69,7 +69,7 @@ li.done {
 }
 .doneCheckbox:focus { outline:0 }
 li > .doneCheckbox {
-    padding: 0px;
+    padding: 4px;
     margin: 0px;
     float: left;
     width: 10%;
@@ -116,6 +116,7 @@ li:hover > .trashButton {
 textarea {
     margin: 0px;
     padding: 0px;
+    display: block;
     margin-left: 15px;
     padding-left: 51px;
     margin-bottom: 12px;

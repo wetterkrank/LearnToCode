@@ -16,10 +16,10 @@ const response = (req, res) => {
         res.end(BIN);
     }
     else {
-        const HTML = fs.readFile(('.' + fname), 'utf8', (err, content) => {
+        fs.readFile(('.' + fname), 'utf8', (err, contents) => {
             if (err) throw err;
             res.writeHead(200, {'Content-Type': 'text/html'});
-            res.end(content);
+            res.end(contents);
         });
     }
 }
