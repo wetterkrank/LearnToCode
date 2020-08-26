@@ -21,5 +21,5 @@ VALUES = {word:value(word) for word in WORDS}
 count = 0
 for word in VALUES:
     if is_triangle(VALUES[word]):
-        count = count + 1
+        count += 1
 print(count)
