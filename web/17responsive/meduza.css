@@ -1,0 +1,125 @@
+body {
+    padding: 0px;
+    margin: 0px;
+    background-color: #000;
+  }
+  
+  /* Шрифты */
+  
+  @font-face {
+    font-family: "Proxima Nova";
+    src: url("fonts/ProximaNova-Regular.woff") format("woff");
+    font-style: normal;
+    font-weight: 400;
+  }
+  
+  @font-face {
+    font-family: "Proxima Nova Bold";
+    src: url("fonts/ProximaNova-Bold.woff") format("woff");
+    font-style: normal;
+    font-weight: 700;
+  }
+  
+  @font-face {
+    font-family: "PFRegal";
+    src: url("fonts/PFRegal-Regular.woff") format("woff");
+    font-style: normal;
+    font-weight: 400;
+  }
+  
+  body {
+    color: #fff;
+    font-family: 'Proxima Nova'
+  }
+  
+  /* Верхняя секция */
+  
+  header, main {
+    width: 90%;
+    max-width: 1390px;
+    margin: 0 auto;
+    border-radius: 8px;
+  }
+  
+  header {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    background-color: #FFF;
+    color: #000;
+    margin-top: 30px;
+  }
+  
+  /* Центральная секция */
+  
+  main {
+    background-color: #f2f2f2;
+    display: flex;
+    font-family: 'PFRegal';
+    padding: 15px;
+    color: #000;
+    margin-top: 30px;
+  }
+  
+  main section {
+    width: 50%;
+    background-color: #FFF;
+    margin: 15px;
+    padding: 15px;
+    border: 1px solid #DDD;
+    border-radius: 8px;
+  }
+  
+  section.important {
+    font-size: 45px;
+    margin: 15px;
+  }
+  
+  section.text-news {
+    display: flex;
+    flex-flow: row wrap;
+  }
+  
+  section.text-news div {
+    width: 50%;
+    font-size: 24px;
+    line-height: 1.5;
+  }
+  
+  section.text-news div article {
+    margin: 15px;
+  }
+  
+  date {
+    font-family: "Proxima Nova";
+    display: block;
+    margin: 15px;
+    font-size: 14px;
+    color: #DDD;
+  }
+  
+  section.important date {
+    margin-left: 0px;
+  }
+
+  @media only screen and (max-width: 1200px) {
+    main {
+      display: block;
+    }
+    section.text-news {
+      display: block;
+    }
+    section.text-news div {
+      width: auto;
+    }
+  }
+
+  @media only screen and (max-width: 900px) {
+    header .left, header .right {
+      display: none;
+    }
+    header .central {
+      width: 100%;
+      text-align: center;
+    }
+  }

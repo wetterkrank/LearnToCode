@@ -1,0 +1,14 @@
+{
+  "name": "math",
+  "version": "1.0.0",
+  "description": "very advanced math",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "wetterkrank",
+  "license": "ISC",
+  "dependencies": {
+    "moment": "^2.25.3"
+  }
+}

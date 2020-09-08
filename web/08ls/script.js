@@ -1,3 +1,5 @@
+'use strict';
+
 // TODO: Mobile-friendly delete icons
 
 let todoList = [];
@@ -16,7 +18,7 @@ const defaultTodoList = [
 function toggleItemState(event) {
     // TODO: toggle the item in array first
     let element = event.target.parentElement;
-    itemPos = getPosById(todoList, element.id);
+    let itemPos = getPosById(todoList, element.id);
     console.log('Toggle item done:', element, todoList[itemPos]);
     element.classList.toggle('done');
     let done = element.classList.contains('done');
@@ -124,7 +126,7 @@ function checkboxClick(event) {
 function deleteItem(event) {
     // TODO: to avoid using stopPropagation, separate click areas
     event.stopPropagation();
-    todoElement = event.target.parentElement;
+    let todoElement = event.target.parentElement;
     console.log('Delete:', todoElement);
     todoList.splice(getPosById(todoList, todoElement.id),1);
     saveToLS();

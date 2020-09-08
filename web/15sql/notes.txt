@@ -1,0 +1,9 @@
+CREATE database webdev101test;
+create table todo(ID SERIAL PRIMARY KEY, title varchar(255), created_at timestamp, status int);
+SELECT COLUMN_NAME FROM information_schema.COLUMNS WHERE TABLE_NAME = 'todo';
+insert into todo(title, status, created_at) values('Install Postgresql and Mongodb', 1, current_timestamp);
+select * from todo;
+select * from todo where DATE(created_at) >= CURRENT_DATE AND DATE(created_at) < CURRENT_DATE + INTERVAL 1 DAY;
+update todo set status = 0 where id = 1;	
+update todo set created_at = 'something' where id = 1; -- This shouldn't work, but it does: 1 row(s) affected, 1 warning(s): 1265 Data truncated for column 'created_at' at row 1
+SHOW VARIABLES LIKE 'sql_mode'

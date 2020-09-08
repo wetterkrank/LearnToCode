@@ -1,0 +1,8 @@
+.date {
+  display: inline-block;
+  padding: 12px;
+  color: #FFF;
+  background-color: #000;
+  border-radius: 4px;
+  font-family: sans-serif;
+}

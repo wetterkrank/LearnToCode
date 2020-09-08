@@ -8,7 +8,7 @@ function balancedBrackets(str) {
             // if the 1st character is not a bracket, strip it
             return balancedBrackets(str.substring(1));
         } else {
-            // if str starts with any bracket, look at the closing one
+            // if str starts with any bracket, look for the closing one
             let closingBrPos = str.indexOf(')', 0);
             if (closingBrPos < 1) {
                 // if str starts with ), fail
